@@ -4,7 +4,7 @@ template<typename Ty, size_t N>
 class hStack
 {
 	using _Size_Ty = std::ratio<sizeof(Ty), 1>;
-	using _Size_N = std::ratio_add<std::ratio<N, 1>, std::ratio<1, 1>>;
+	using _Size_N = std::ratio<N, 1>;
 	using _Size = std::ratio_multiply<_Size_Ty, _Size_N>;
 
 	size_t _top = 0;
