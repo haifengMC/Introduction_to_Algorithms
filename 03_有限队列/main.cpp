@@ -3,6 +3,8 @@ P131
 10.1-3仿照图10-2，画图表示依次执行操作ENQUEUE(Q，4)、ENQUEUE(Q，1)、
 ENQUEUE(Q，3)、DEQUEUE(Q)、ENQUEUE(Q，8)和 DEQUEUE(Q)每一步的结果,
 队列初始为空，存储于数组Q[1..6]中。
+
+10.1-4重写ENQUEUE和 DEQUEUE的代码，使之能处理队列的下溢和上溢。
 */
 
 #include <ratio>
