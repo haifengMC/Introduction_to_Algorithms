@@ -14,7 +14,6 @@ P131
 
 using namespace std;
 
-#define _OPT_STRING(x) #x
 #define OPT(func, ...) \
 	cout << #func << " "#####__VA_ARGS__##":" << d.func(##__VA_ARGS__);pD()
 
