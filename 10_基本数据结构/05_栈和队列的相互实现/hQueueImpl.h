@@ -51,11 +51,12 @@ size_t hQueue<Ty, N>::enqueue(const Ty& t)
 }
 
 template<typename Ty, size_t N>
-size_t hQueue<Ty, N>::dequeue()
+Ty hQueue<Ty, N>::dequeue()
 {
 	assert(_head != _tail);
+	Ty tmp = at(0);
 	_head = (_head + 1) % _Size_N::num;
-	return size();
+	return tmp;
 }
 
 template<typename Ty, size_t N>

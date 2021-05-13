@@ -22,7 +22,7 @@ public:
 	size_t size() const;
 	Ty& at(size_t id);
 	size_t enqueue(const Ty& t);
-	size_t dequeue();
+	Ty dequeue();
 
 	Iterator begin();
 	Iterator end();
