@@ -11,8 +11,10 @@ class hStack
 	Ty* _data = (Ty*)malloc(_Size::num);
 public:
 	bool empty() const { return !_top; }
+	size_t size() const { return _top; }
+	Ty& at(size_t id);
 	size_t push(const Ty& t);
-	size_t pop();
+	Ty pop();
 
 	Ty* begin() { return _data; }
 	Ty* end() { return _data + _top; }

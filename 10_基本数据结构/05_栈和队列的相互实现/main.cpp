@@ -14,13 +14,15 @@ P131
 
 using namespace std;
 
-#define OPT(func, ...) \
+#define OPTS(func, ...) \
 	cout << #func << " "#####__VA_ARGS__##":" << s.func(##__VA_ARGS__);pS()
+#define OPTQ(func, ...) \
+	cout << #func << " "#####__VA_ARGS__##":" << q.func(##__VA_ARGS__);pQ()
 
 
 int main()
 {
-	TestStack<int, 6> s;
+	TestStack<int, 3> s;
 	auto pS = [&]()
 	{
 		cout << "{";
@@ -35,12 +37,36 @@ int main()
 		cout << "}" << endl;
 	};
 
-	OPT(push, 3);
-	OPT(push, 1);
-	OPT(push, 4);
-	OPT(pop);
-	OPT(push, 8);
-	OPT(pop);
+	OPTS(push, 3);
+	OPTS(push, 1);
+	OPTS(push, 4);
+	OPTS(pop);
+	OPTS(push, 8);
+	OPTS(pop);
+
+
+
+	TestQueue<int, 3> q;
+	auto pQ = [&]()
+	{
+		cout << "{";
+		bool first = true;
+		for (size_t i = 0; i < q.size(); i++)
+		{
+			if (first) first = false;
+			else cout << ", ";
+
+			cout << q[i];
+		}
+		cout << "}" << endl;
+	};
+
+	OPTQ(push, 3);
+	OPTQ(push, 1);
+	OPTQ(push, 4);
+	OPTQ(pop);
+	OPTQ(push, 8);
+	OPTQ(pop);
 
 	return 0;
 }
