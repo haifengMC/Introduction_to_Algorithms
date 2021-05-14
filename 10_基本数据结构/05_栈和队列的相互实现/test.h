@@ -17,7 +17,7 @@ public:
 
 		size_t oldId = _id;
 		_id = (_id + 1) % 2;
-		while (size() > 1)
+		while (que[oldId].size() > 1)
 			que[_id].enqueue(que[oldId].dequeue());
 
 		return que[oldId].dequeue();
