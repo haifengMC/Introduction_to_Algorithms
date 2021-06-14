@@ -18,20 +18,20 @@ P134
 */
 
 #include <iostream>
+#include <typeinfo>
+#include <list>
+#include <string>
 #include "hList.h"
 
 using namespace std;
 
 int main()
 {
-	hList<size_t> l;
-	cout << l.empty() << endl;
-	hAllocator alloc;
-	size_t* p = alloc.alloc<size_t>();
-	alloc.create(p, 10);
-	cout << *p << endl;
-	alloc.destroy(p);
-	alloc.dealloc(p);
-
+	size_t* p = hStdAlloc<size_t>::alloc();
+	hStdAlloc<size_t>::create(p, 10);
+	cout << p << ":" << *p << endl;
+	hStdAlloc<size_t>::destroy(p);
+	hStdAlloc<size_t>::dealloc(p);
+	list.emplace_back()
 	return 0;
 }

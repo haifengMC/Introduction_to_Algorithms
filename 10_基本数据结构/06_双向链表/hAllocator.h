@@ -1,15 +1,16 @@
 #pragma once
 
-class hAllocator
+
+template<typename Ty>
+class hStdAlloc
 {
-	std::allocator<void> _alloc;
+	static std::allocator<Ty> _alloc;
 public:
-	template<typename Ty>
-	Ty* alloc(size_t n = 1) { return (Ty*)_alloc.allocate(n); }
-	template<typename Ty>
-	void dealloc(Ty* p, size_t n = 1) { _alloc.deallocate(p, n); }
-	template<typename Ty, typename... Args >
-	void create(Ty* p, Args&&... args) { ::new((void*)p) Ty(std::forward<Args>(args)...); }
-	template<typename Ty>
-	void destroy(Ty* p) { if (p) p->~Ty(); }
+	static Ty* alloc(size_t n = 1) { return _alloc.allocate(n); }
+	static void dealloc(Ty* p, size_t n = 1) { _alloc.deallocate(p, n); }
+	template<typename... Args >
+	static void create(Ty* p, Args&&... args) { _alloc.construct(p, args...); }
+	static void destroy(Ty* p) { _alloc.destroy(p); }
 };
+template<typename Ty>
+std::allocator<Ty> hStdAlloc<Ty>::_alloc;

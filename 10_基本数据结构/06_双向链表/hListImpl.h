@@ -4,44 +4,46 @@
 template<typename Ty>
 class hListNode
 {
-	template<typename Ty, typename alloc>
-	friend class  hList;
-
 	Ty* _data = NULL;
-	hListNode<Ty>* _prev = NULL;
-	hListNode<Ty>* _next = NULL;
+	hListNode<Ty>* _other[2] = {};
 public:
-	
+	hListNode<Ty>*& next(bool rFlag) { return _other[rFlag ? 0 : 1]; }
+	hListNode<Ty>*& prev(bool rFlag) { return _other[rFlag ? 1 : 0]; }
+};
+
+template<typename Ty>
+class hListIterator
+{
+	hListNode<Ty>* _node;
 };
 
 template<typename Ty, typename alloc>
-inline hList<Ty, alloc>::hList()
-{
-	_nil._prev = &_nil;
-	_nil._next = &_nil;
-}
-
-template<typename Ty, typename alloc>
-inline hList<Ty, alloc>::~hList()
+hList<Ty, alloc>::~hList()
 {
 }
 
 template<typename Ty, typename alloc>
-bool hList<Ty, alloc>::empty() const
+template <class... Arg>
+inline bool hList<Ty, alloc>::emplaceBack(Arg&&... param)
 {
-	return &_nil == _nil._next;
-}
+	_Node* pNode = _AllocNode::alloc();
+	if (!pNode)
+		return false;
 
-template<typename Ty, typename alloc>
-inline void hList<Ty, alloc>::pushBack(const Ty& value)
-{
-	hListNode<Ty>* pNode = _alloc.alloc();
-	_alloc.create(pNode, value);
-	pNode->_data = _alloc.alloc();
-}
+	_AllocNode::create(pNode);
+	pNode->_data = _Alloc::alloc();
+	if (!pNode->_data)
+	{
+		_AllocNode::destroy(pNode);
+		_AllocNode::dealloc(pNode);
+		return false;
+	}
+	_Alloc::create(pNode->_data, param);
 
-template<typename Ty, typename alloc>
-inline void hList<Ty, alloc>::pushBack(Ty&& value)
-{
+	pNode->prev(_rvFlag) = _node.prev(_rvFlag);
+	pNode->next(_rvFlag) = &_node;
+	_node.prev(_rvFlag)->next(_rvFlag) = pNode;
+	_node.prev(_rvFlag) = pNode;
 
+	return true;
 }
