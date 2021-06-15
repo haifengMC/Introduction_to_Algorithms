@@ -21,17 +21,18 @@ P134
 #include <typeinfo>
 #include <list>
 #include <string>
+#include <assert.h>
 #include "hList.h"
 
 using namespace std;
 
 int main()
 {
-	size_t* p = hStdAlloc<size_t>::alloc();
-	hStdAlloc<size_t>::create(p, 10);
-	cout << p << ":" << *p << endl;
-	hStdAlloc<size_t>::destroy(p);
-	hStdAlloc<size_t>::dealloc(p);
-	list.emplace_back()
+	hList<int> l;
+	l.pushBack(1);
+	l.pushBack(2);
+	l.pushBack(3);
+	for (auto i : l)
+		cout << i << endl;
 	return 0;
 }
