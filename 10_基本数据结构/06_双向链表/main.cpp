@@ -26,13 +26,30 @@ P134
 
 using namespace std;
 
+template<typename Ty>
+void printList(hList<Ty>& l)
+{
+	bool first = true;
+	cout << "{";
+	for (auto i : l)
+	{
+		if (first) first = false;
+		else cout << ",";
+
+		cout << i;
+	}
+	cout << "}" << endl;
+}
+
 int main()
 {
 	hList<int> l;
 	l.pushBack(1);
 	l.pushBack(2);
 	l.pushBack(3);
-	for (auto i : l)
-		cout << i << endl;
+	printList(l);
+	l.reverse();
+	printList(l);
+
 	return 0;
 }
