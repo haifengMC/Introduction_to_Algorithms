@@ -77,7 +77,7 @@ inline bool hList<Ty, Alloc>::emplaceBack(Arg&&... param)
 		_AllocNode::dealloc(pNode);
 		return false;
 	}
-	_AllocTy::create(pNode->_data, param...);
+	_AllocTy::create(pNode->_data, std::forward<Arg>(param)...);
 
 	++_num;
 	pNode->prev(_rvFlag) = _node.prev(_rvFlag);

@@ -31,7 +31,7 @@ void printList(hList<Ty>& l)
 {
 	bool first = true;
 	cout << l.size() << "{";
-	for (auto i : l)
+	for (auto& i : l)
 	{
 		if (first) first = false;
 		else cout << ",";
@@ -41,15 +41,33 @@ void printList(hList<Ty>& l)
 	cout << "}" << endl;
 }
 
+struct A
+{
+	int _i = 0;
+	A(int i) { _i = i; }
+	A(const A&) = delete;
+	A(A&&) = default;
+};
+ostream& operator<<(ostream& os, const A& a)
+{
+	return os << "A:" << a._i;
+}
+
 int main()
 {
-	hList<int> l;
-	l.pushBack(1);
-	l.pushBack(2);
-	l.pushBack(3);
-	printList(l);
-	l.reverse();
-	printList(l);
+	//hList<int> l1;
+	//l1.pushBack(1);
+	//l1.pushBack(2);
+	//l1.pushBack(3);
+	//printList(l1);
+	//l1.reverse();
+	//printList(l1);
+
+	hList<A> l2;
+	l2.pushBack(A(1));
+	l2.pushBack(A(2));
+	l2.pushBack(A(3));
+	printList(l2);
 
 	return 0;
 }
