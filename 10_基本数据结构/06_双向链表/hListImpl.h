@@ -79,6 +79,7 @@ inline bool hList<Ty, Alloc>::emplaceBack(Arg&&... param)
 	}
 	_AllocTy::create(pNode->_data, param...);
 
+	++_num;
 	pNode->prev(_rvFlag) = _node.prev(_rvFlag);
 	pNode->next(_rvFlag) = &_node;
 	_node.prev(_rvFlag)->next(_rvFlag) = pNode;

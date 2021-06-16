@@ -30,7 +30,7 @@ template<typename Ty>
 void printList(hList<Ty>& l)
 {
 	bool first = true;
-	cout << "{";
+	cout << l.size() << "{";
 	for (auto i : l)
 	{
 		if (first) first = false;
