@@ -3,6 +3,8 @@
 
 using namespace std;
 
+uint8_t maxEleId = 0;
+
 struct HashTree
 {
 	static uint8_t _eleNum[];
@@ -30,6 +32,11 @@ struct HashTree
 			pNext->insert(i);
 		else
 		{
+			if (maxEleId < _eleId + 1)
+			{
+				maxEleId = _eleId + 1;
+				cout << "[" << (size_t)maxEleId << "]" << _data;
+			}
 			pNext = new HashTree(_eleId + 1);
 			pNext->_data = i;
 		}
@@ -63,7 +70,7 @@ int main()
 {
 	HashTree tree;
 	for (int i = 1; i < 1000; ++i)
-		if (i % 2) tree.insert(i);
+		tree.insert(i);
 
 	tree.fillDebug(cout) << endl;
 	size_t i = 0;
